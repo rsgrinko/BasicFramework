@@ -2,7 +2,7 @@
 A simple framework for building web applications
 
 # class DataBase
-When creating a class in the constructor, you must specify the data for connecting to the database
+When creating a class in the constructor, you must specify the data for connecting to the database<br>
 $DataBase = new DataBase('server', 'db_user', 'db_password', 'db_name');
 
 Supported methods:
