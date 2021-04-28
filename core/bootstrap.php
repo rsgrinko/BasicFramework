@@ -8,5 +8,5 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/lib/DataBase.class.php';	
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/lib/User.class.php';	
 
-$DataBase = new DataBase('localhost', 'rsgrinko_iot', '2670135', 'rsgrinko_iot');
+$DataBase = new DataBase('localhost', 'db_user', 'password', 'db_name');
 $User = new User();
