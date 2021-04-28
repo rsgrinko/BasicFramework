@@ -1,10 +1,10 @@
 <?php
-	/*
-		Класс для работы с базой данных
-		Роман Сергеевич Гринько
-		rsgrinko@gmail.com
-		https://it-stories.ru
-	*/
+/*
+	Класс для работы с базой данных
+	Роман Сергеевич Гринько
+	rsgrinko@gmail.com
+	https://it-stories.ru
+*/
 	
 class DataBase {
 	public  $db;

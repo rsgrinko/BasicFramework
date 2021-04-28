@@ -1,10 +1,10 @@
 <?php
-	/*
-		Класс для работы с пользователями
-		Роман Сергеевич Гринько
-		rsgrinko@gmail.com
-		https://it-stories.ru
-	*/
+/*
+	Класс для работы с пользователями
+	Роман Сергеевич Гринько
+	rsgrinko@gmail.com
+	https://it-stories.ru
+*/
 	
 class User {
 	public $id;
