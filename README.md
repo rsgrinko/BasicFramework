@@ -10,8 +10,6 @@ public function query($sql, $params = [])<br>
 public function getItem($table, $where)<br>
 public function getItems($table, $where, $sort = '')<br>
 public function getAll($table, $sort = '', $params = [])<br>
-<br>
-<br>
 ## class Users
 Used to work with users (authorization, logout, registration, receiving fields, etc.)<br>
 <br>
