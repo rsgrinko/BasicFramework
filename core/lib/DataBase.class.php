@@ -159,9 +159,7 @@ class DataBase {
 			return false;
 		}		 
 	}
-	
-	
-	
+
 
 	public function getRow($table, $sql = '', $params = []) {
 		$result = $this->query('SELECT * FROM `'.$table.'` '.$sql.' LIMIT 1', $params);
@@ -172,6 +170,4 @@ class DataBase {
 		}
 	}
 	
-	
-
 }

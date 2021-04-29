@@ -28,6 +28,36 @@ if($User->is_user()):
 	<p>Добро пожаловать, <?=$user_fields['name'];?>! <a href="example.php?act=logout">Выход</a></p>
 	<pre><?=print_r($user_fields, true);?></pre>
 <?php
+echo 'Входящих писем: ('.$User->getMailCount($User->id, 'to', 'Y').'/'.$User->getMailCount($User->id, 'to').')<br>';
+echo 'Исходящих писем: '.$User->getMailCount($User->id, 'from').'<br>';
+echo 'Мои сообщения:<br>';
+?>
+<table border="1px" style="border-collapse: collapse;">
+	<tr>
+		<td>ID</td>
+		<td>От кого</td>
+		<td>Сообщение</td>
+		<td>Не прочитано</td>
+		<td>Время</td>
+	</tr>
+<?php
+$mail = $User->getMail();
+foreach($mail as $item):
+$user_fields = $User->getFields($item['message_from']);
+?>
+	<tr>
+		<td><?=$item['id'];?></td>
+		<td><?=$user_fields['name'];?></td>
+		<td><?=$item['message'];?></td>
+		<td><?=$item['new'];?></td>
+		<td><?=date("d.m.Y H:i:s", $item['time']);?></td>
+	</tr>
+
+<?php	
+endforeach;
+?>
+</table>
+<?php
 else:
 ?>
 	<form action="example.php" method="POST">
@@ -43,10 +73,11 @@ endif;
 echo '<pre>'.session_id().'</pre>';
 
 
+
 /*
 	Регистрация
 */
-
+/*
 $new_user['login'] = 'demo';
 $new_user['pass'] = '12345';
 $new_user['access_level'] = 'user';
@@ -57,4 +88,4 @@ if(!$User->user_exists($new_user['login'])) {
 	echo 'Registration Success';
 } else {
 	echo 'User already exists';
-}
+}*/

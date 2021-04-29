@@ -9,9 +9,11 @@
 class User {
 	public $id;
 	public $users_table;
+	public $mail_table;
 	
-	public function __construct($users_table = 'users') {
+	public function __construct($users_table = 'users', $mail_table = 'messages') {
 		$this->users_table = $users_table;
+		$this->mail_table = $mail_table;
 	}	
 	
 	// Получение всех полей пользователя
@@ -120,6 +122,61 @@ class User {
 		session_unset();
 		session_destroy();
 		return true;
-		}	
+		}
+	
+	// Получает количество входящих писем пользователя
+	public function getMailCount($user_id = '', $type = 'to', $new = ''){
+		global $DataBase;
+		
+		if($user_id==''){
+			$user_id = $this->id;
+		}
+		
+		if($type == 'to'){
+			$message_type = 'message_to';
+		} else {
+			$message_type = 'message_from';
+		}
+		
+		if($new=='Y'){
+			$arFilter = array($message_type => $user_id, 'new' => 'Y');
+		} else{
+			$arFilter = array($message_type => $user_id);
+		}
+		
+		$result = $DataBase->getItems($this->mail_table, $arFilter);
+	
+		if($result){
+			return count($result);
+		} else {
+			return 0;
+		}
+	}
+		
+	public function getMail($user_id = '', $type = 'to'){
+		global $DataBase;
+		
+		if($user_id==''){
+			$user_id = $this->id;
+		}
+		
+		if($type == 'to'){
+			$message_type = 'message_to';
+		} else {
+			$message_type = 'message_from';
+		}
+		
+		$result = $DataBase->getItems($this->mail_table, array($message_type => $user_id), array('id'=>'desc'));
+		
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}	
+		
+	public function getNewMail(){
+		
+	}		
 
 }
