@@ -10,6 +10,8 @@ public function query($sql, $params)<br>
 public function getItem($table, $where)<br>
 public function getItems($table, $where, $sort)<br>
 public function getAll($table, $sort, $params)<br>
+public function addItem($table, $data)<br>
+
 ## class Users
 Used to work with users (authorization, logout, registration, receiving fields, etc.)<br>
 <br>
@@ -17,4 +19,8 @@ Used to work with users (authorization, logout, registration, receiving fields, 
 public function Authorize($id)<br>
 public function getFields($id)<br>
 public function Logout()<br>
+public function is_user()<br>
+public function Registration($login, $password, $level = 'user', $name = '')<br>
+public function user_exists($login)<br>
+public function SecurityAuthorize($login, $password)<br>
 <br>
