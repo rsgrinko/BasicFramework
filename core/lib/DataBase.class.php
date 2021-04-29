@@ -72,6 +72,20 @@ class DataBase {
 		
 		return $sort_string;
 	}
+	
+	// Вспомогательный метод для построения запросов
+	private function createInsertString($data, $param = 'key'){
+		$result = '';
+		foreach($data as $k=>$v){
+			if($param=='key') {
+				$result = $result.$k.', ';
+			}elseif($param=='value') {
+				$result = $result.'\''.$v.'\', ';
+			}
+		}
+		$result = substr($result, 0, -2);
+		return $result;
+	}
 
 	// Метод для простого выполнения заданного SQL запроса.
 	// Возвраает результат в виде массива или ложь в случае неудачи
@@ -107,6 +121,18 @@ class DataBase {
 			return false;
 		}
 	}	
+
+	
+	// Добавить элемент в базу
+	public function addItem($table, $data) {
+		$result = $this->query('INSERT INTO `'.$table.'` ('.$this->createInsertString($data, 'key').') VALUES ('.$this->createInsertString($data, 'value').')');
+		if($result) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
+	
 	
 	// Получить элементЫ из базы
 	public function getItems($table, $where, $sort = '') {

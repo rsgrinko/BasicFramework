@@ -7,6 +7,10 @@
 */
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/bootstrap.php';
 
+
+/*
+	Авторизация
+*/
 if($_REQUEST['act']=='login'){
 	if(!$User->SecurityAuthorize($_REQUEST['login'], $_REQUEST['password'])) {
 		echo 'login fail!<br>';
@@ -37,3 +41,20 @@ endif;
 
 
 echo '<pre>'.session_id().'</pre>';
+
+
+/*
+	Регистрация
+*/
+
+$new_user['login'] = 'demo';
+$new_user['pass'] = '12345';
+$new_user['access_level'] = 'user';
+$new_user['name'] = 'Петька Тестер';
+
+if(!$User->user_exists($new_user['login'])) {
+	$User->Registration($new_user['login'], $new_user['pass'], $new_user['access_level'], $new_user['name']);
+	echo 'Registration Success';
+} else {
+	echo 'User already exists';
+}

@@ -33,7 +33,35 @@ class User {
 			return false;
 		}
 	}
+
+	// Метод выполняет регистрацию пользователя в системе
+	public function Registration($login, $password, $level = 'user', $name = ''){
+		global $DataBase;
+		$result = $DataBase->addItem($this->users_table, array('login' => $login, 'password' => $password, 'access_level' => $level, 'name' => $name, 'last_active' => time()));
+		
+		if($result) {
+			$this->id = $id;
+			$_SESSION['authorize'] = 'Y';
+			$_SESSION['login'] = $result['login'];
+			$_SESSION['password'] = $result['password'];		
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
+	// Метод проеряет занятость логина в системе
+	public function user_exists($login){
+		global $DataBase;
+		$result = $DataBase->getItem($this->users_table, array('login'=>$login));
+		
+		if($result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 	// Метод выполняет авторизацию пользователя в системе по ID
 	public function Authorize($id){
 		global $DataBase;
