@@ -1,6 +1,8 @@
 # BasicFramework
 A simple framework for building web applications
 
+![alt text](user-example.png "Описание будет тут")
+
 ## class DataBase
 When creating a class in the constructor, you must specify the data for connecting to the database<br>
 $DataBase = new DataBase('server', 'db_user', 'db_password', 'db_name');<br>
