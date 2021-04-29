@@ -5,8 +5,9 @@
 	rsgrinko@gmail.com
 	https://it-stories.ru
 */
+require_once $_SERVER['DOCUMENT_ROOT'].'/core/session.php';	
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/lib/DataBase.class.php';	
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/lib/User.class.php';	
 
-$DataBase = new DataBase('localhost', 'db_user', 'password', 'db_name');
+$DataBase = new DataBase('localhost', 'rsgrinko_iot', '2670135', 'rsgrinko_iot');
 $User = new User();

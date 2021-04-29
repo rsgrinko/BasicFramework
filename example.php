@@ -1,41 +1,39 @@
 <?php
+/*
+	Пример использования класса
+	Роман Сергеевич Гринько
+	rsgrinko@gmail.com
+	https://it-stories.ru
+*/
 require_once $_SERVER['DOCUMENT_ROOT'].'/core/bootstrap.php';
 
-// DataBase class
+if($_REQUEST['act']=='login'){
+	if(!$User->SecurityAuthorize($_REQUEST['login'], $_REQUEST['password'])) {
+		echo 'login fail!<br>';
+		}	
+} 
 
-// Query
-$result = $DataBase->query('SELECT * FROM iot_sensors WHERE ID=3924538');
-echo '<pre>'.print_r($result, true).'</pre>';
-
-// Update
-$result = $DataBase->update('iot_sensors',
-                                        array( //WHERE ID=3924538
-                                            'ID' => '3924538'
-                                        ),
-                                        array( //SET VALUE=601, SENSOR=test_sensor2
-                                            'VALUE' => '601',
-                                            'SENSOR' => 'test_sensor2'
-                                        )
-                            );
-echo '<pre>'.print_r($result, true).'</pre>';
+if($_GET['act']=='logout') {
+	$User->Logout();
+}
 
 
-// Get items
-$result = $DataBase->getItems('iot_sensors',
-                                array(
-                                    'VALUE'=>'>32' // WHERE VALUE>32
-                                ),
-                                array(
-                                    'VALUE'=>'DESC' // ORDER BY VALUE DESC
-                                ));
-echo '<pre>'.print_r($result, true).'</pre>';
+if($User->is_user()):
+	$user_fields = $User->getFields();
+?>
+	<p>Добро пожаловать, <?=$user_fields['name'];?>! <a href="example.php?act=logout">Выход</a></p>
+	<pre><?=print_r($user_fields, true);?></pre>
+<?php
+else:
+?>
+	<form action="example.php" method="POST">
+		<input type="hidden" name="act" value="login">
+		<input type="text" name="login" placeholder="Enter your login"><br>
+		<input type="password" name="password" placeholder="Enter your password"><br>	
+		<input type="submit" value="Login"><br>
+	</form>
+<?php	
+endif;
 
 
-// users class
-
-$User->Authorize(1); //set cookies
-
-$result = $User->getFields(1); //Get fields for user id=1
-echo '<pre>'.print_r($result, true).'</pre>';
-
-$User->Logout(); //remove cookies
+echo '<pre>'.session_id().'</pre>';
