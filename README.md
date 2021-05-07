@@ -1,7 +1,8 @@
 # BasicFramework
 A simple framework for building web applications
+![alt text](loginform.png "Login form")
 
-![alt text](user-example.png "Описание будет тут")
+![alt text](user-example.png "Private user section")
 
 ## class DataBase
 When creating a class in the constructor, you must specify the data for connecting to the database<br>
